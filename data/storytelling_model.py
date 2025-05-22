@@ -259,7 +259,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Make output and temp folders if they don't exist
-    dest_folder = "results/storytelling/" + args.variant
+    dest_folder = "storytelling/results/" + args.variant
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)
 
@@ -291,8 +291,8 @@ if __name__ == '__main__':
     # Load argument data first for prediction in each split
     ############
     # Load data into a DataFrame for later merging with the predictions
-    ibm_df = pd.read_csv("data/arguments/ibm-argq_aggregated.csv", sep="\t")
-    cmv_df = pd.read_csv("data/arguments/CMV_Cornell_2016.csv", sep="\t")
+    ibm_df = pd.read_csv("argument/ibm-argq_aggregated.csv", sep="\t")
+    cmv_df = pd.read_csv("argument/CMV_Cornell_2016.csv", sep="\t")
     # Convert into Datasets
     ibm_data = ibm_df  # [["text_id", "text"]]
     ibm_data["label"] = pd.Series([0 for i in range(len(ibm_data))])
@@ -309,8 +309,8 @@ if __name__ == '__main__':
         argument_data["ibm"], batch_size=16, collate_fn=data_collator)
     cmv_loader = DataLoader(
         argument_data["cmv"], batch_size=16, collate_fn=data_collator)
-    print("Loaded argument data from <== data/arguments/ibm-argq_aggregated.csv\n" +
-          30*" "+"data/arguments/CMV_Cornell_2016.csv")
+    print("Loaded argument data from <== argument/ibm-argq_aggregated.csv\n" +
+          30*" "+"argument/CMV_Cornell_2016.csv")
     # After the data has the right type for prediction, set the index of the original DataFrame for later
     ibm_df.set_index(("text_id"), inplace=True)
     cmv_df.set_index(("text_id"), inplace=True)
@@ -320,9 +320,9 @@ if __name__ == '__main__':
     # Repeat training and predicting process 10 times for different dataset splits
     ##############
     storytelling_data = pd.read_csv(
-        f"data/storytelling/storytelling_{args.variant}.csv", sep="\t")
+        f"storytelling/storytelling_{args.variant}.csv", sep="\t")
     print("Loaded training data from <==",
-          f"data/storytelling/storytelling_{args.variant}.csv")
+          f"storytelling/storytelling_{args.variant}.csv")
 
     for split in range(num_splits):
         print(15*"=", f"Split {split+1}/{num_splits}", 15*"=")
