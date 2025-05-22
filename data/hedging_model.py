@@ -281,12 +281,12 @@ def true_hedge(word):
 
 
 if __name__ == '__main__':
-    dest_folder = "results/hedging"
+    dest_folder = "hedging/results"
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)
 
     # Load IBM argument data
-    ibm = pandas.read_csv("data/arguments/ibm-argq_aggregated.csv", sep="\t")#C:/Users/HP Envy/Documents/Uni/Master/22_winter/what-makes-persuasiveness/
+    ibm = pandas.read_csv("argument/ibm-argq_aggregated.csv", sep="\t")
     ibm.set_index(("text_id"), inplace=True)
     print("Loaded IBM data...")
     # Detect hedges for all instances and add as new dataframe columns
@@ -303,7 +303,7 @@ if __name__ == '__main__':
     print("Saved IBM with hedges...")
 
     # Load CMV argument data
-    cmv = pandas.read_csv("data/arguments/CMV_Cornell_2016.csv", sep="\t")#C:/Users/HP Envy/Documents/Uni/Master/22_winter/what-makes-persuasiveness/
+    cmv = pandas.read_csv("argument/CMV_Cornell_2016.csv", sep="\t")
     cmv.set_index(("text_id"), inplace=True)
     print("Loaded CMV data...")
     # Detect hedges for all instances
