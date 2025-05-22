@@ -259,7 +259,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Make output and temp folders if they don't exist
-    dest_folder = "results/emotions/"+args.variant
+    dest_folder = "emotion/results/"+args.variant
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)
 
@@ -291,16 +291,16 @@ if __name__ == '__main__':
     # Load argument data first for prediction in each split
     ############
     # Reading IBM data for prediction ############
-    ibm = pd.read_csv("data/arguments/ibm-argq_aggregated.csv", sep="\t")
+    ibm = pd.read_csv("argument/ibm-argq_aggregated.csv", sep="\t")
     ibm_data = ibm
     ibm_data["label"] = pd.Series([0 for i in range(len(ibm_data))])
     ibm_data = Dataset.from_pandas(ibm)
     ibm.set_index(("text_id"), inplace=True)
 
     # Reading CMV data for prediction ############
-    cmv = pd.read_csv("data/arguments/CMV_Cornell_2016.csv", sep="\t")
-    print("Loaded argument data from <== data/arguments/ibm-argq_aggregated.csv\n" +
-          26*" "+"<== data/arguments/CMV_Cornell_2016.csv")
+    cmv = pd.read_csv("argument/CMV_Cornell_2016.csv", sep="\t")
+    print("Loaded argument data from <== argument/ibm-argq_aggregated.csv\n" +
+          26*" "+"<== argument/CMV_Cornell_2016.csv")
     # WINDOW #########
     # CMV posts are much longer than training and IBM data, thus split long posts (>300 words) into 3 parts
     tmp = {"text_id": [], "text": [], "persuasiveness": []}
@@ -361,9 +361,9 @@ if __name__ == '__main__':
 
         else:
             emo_data = pd.read_csv(
-                f"data/emotions/{args.variant}/crowd-enVent_{emotion}.csv", sep="\t")
+                f"emotion/{args.variant}/crowd-enVent_{emotion}.csv", sep="\t")
             print("Loaded training data from <==",
-                  f"data/emotion/{args.variant}/crowd-enVent_{emotion}.csv")
+                  f"emotion/{args.variant}/crowd-enVent_{emotion}.csv")
             for split in range(num_splits):
                 print(30*"_" + f"\nSplit {split+1}/{num_splits}")
                 train_df, val_test_df = train_test_split(
@@ -451,7 +451,7 @@ if __name__ == '__main__':
                     cmv_splits[f"score_{split}"] = tmp[f"score_{split}"]
 
             # After training/prediction for all splits is done for one emotion,
-            # save the split results includeing the prediction probabilities
+            # save the split results including the prediction probabilities
             print(
                 30*" "+f"\nNow aggregating results for all splits of {emotion}")
             ibm_splits.to_csv(dest_folder + "/ibm_" +
