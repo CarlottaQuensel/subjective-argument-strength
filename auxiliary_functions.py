@@ -165,16 +165,16 @@ def poly_forward_selection(data: pd.DataFrame, dv: str, model_type: str):
 ############################################
 # Plot individual regression effects
 ############################################
-def plot_iv(iv: str, num: (int, int)):
+def plot_iv(iv: str, dv: str, corpus: str, num: (int, int)):
     if num[1] < 6:
         color = sns.color_palette("mako").as_hex()[num[0]+1]
     elif num[1] > 6:
         color = sns.color_palette("mako", n_colors=num[1]).as_hex()[num[0]]
     else:
         color = sns.color_palette("mako").as_hex()[num[0]]
-    output = sns.regplot(data=cmv, x=iv, y="persuasiveness", scatter=False, color=color, logistic=True)
+    output = sns.regplot(data=cmv, x=iv, y=dv, scatter=False, color=color, logistic=True)
     output.set(xlabel=re_feats(cmv[iv].name))
-    plt.savefig("img/cmv_"+iv+".svg", format="svg")
+    plt.savefig("img/"+corpus+"_"+iv+".svg", format="svg")
     plt.show()
 
 ############################################
