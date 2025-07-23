@@ -11,7 +11,7 @@ If you use this code in your research, please cite:
 
 ```bib
 @InProceedings{quensel:2025,
-  author =                      {Carlotta Quensel and Nele Falk and Gabriella Lapesa},
+  author =                      {Carlotta Quensel and Neele Falk and Gabriella Lapesa},
   booktitle =                   {12th Workshop on Argument Mining (ArgMining 2025) at ACL},
   codeurl =                     {https://github.com/CarlottaQuensel/subjective-argument-strength},
   doi =                         {},
