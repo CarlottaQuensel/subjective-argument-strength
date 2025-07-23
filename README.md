@@ -1,6 +1,4 @@
-### Investigating Subjective Factors of Argument Strength: Storytelling, Emotions, and Hedging
-
---------
+# Investigating Subjective Factors of Argument Strength: Storytelling, Emotions, and Hedging
 
 ## Overview
 This repository contains the source code and data for the ArgMining 2025 paper titled "Investigating Subjective Factors of Argument Strength: Storytelling, Emotions, and Hedging" [[paper](https://webis.de/publications.html#quensel_2025)].
