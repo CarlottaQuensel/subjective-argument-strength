@@ -1,4 +1,5 @@
-import os, pandas
+import os
+import pandas
 import stanza
 stanza.download("en")
 
@@ -96,7 +97,7 @@ def hedge_detection(document: str):
     # global_abs_hedge /= len(doc.sentences)
     avg_hedge /= len(doc.sentences)
 
-    return {"first_hedge": first_hedge, "first_abs_hedge": first_abs_hedge, "final_hedge": final_hedge, "final_abs_hedge": final_abs_hedge, "global_abs_hedge": global_abs_hedge, "avg_hedge": avg_hedge}
+    return {"first_avg_hedge": first_hedge, "first_abs_hedge": first_abs_hedge, "final_avg_hedge": final_hedge, "final_abs_hedge": final_abs_hedge, "whole_abs_hedge": global_abs_hedge, "whole_avg_hedge": avg_hedge}
 
 
 def true_hedge(word):
@@ -292,7 +293,8 @@ if __name__ == '__main__':
     # Detect hedges for all instances and add as new dataframe columns
     hedges = [hedge_detection(t) for t in ibm["text"]]
     print("Calculated hedge ratios for IBM...")
-    ibm_hedges = {"first_hedge": [], "first_abs_hedge": [], "final_hedge": [], "final_abs_hedge": [], "global_abs_hedge": [], "avg_hedge": []}
+    ibm_hedges = {"first_hedge": [], "first_abs_hedge": [], "final_hedge": [
+    ], "final_abs_hedge": [], "global_abs_hedge": [], "avg_hedge": []}
     for instance in hedges:
         for h in ibm_hedges:
             ibm_hedges[h].append(instance[h])
@@ -309,7 +311,8 @@ if __name__ == '__main__':
     # Detect hedges for all instances
     hedges = [hedge_detection(t) for t in cmv["text"]]
     print("Calculated hedge ratios for CMV...")
-    cmv_hedges = {"first_hedge": [], "first_abs_hedge": [], "final_hedge": [], "final_abs_hedge": [], "global_abs_hedge": [], "avg_hedge": []}
+    cmv_hedges = {"first_hedge": [], "first_abs_hedge": [], "final_hedge": [
+    ], "final_abs_hedge": [], "global_abs_hedge": [], "avg_hedge": []}
     for instance in hedges:
         for h in cmv_hedges:
             cmv_hedges[h].append(instance[h])
